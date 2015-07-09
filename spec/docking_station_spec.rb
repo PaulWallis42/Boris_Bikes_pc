@@ -22,9 +22,10 @@ describe DockingStation do
         subject.capacity.times { subject.dock(Bike.new) }
         expect { subject.dock(Bike.new) }.to raise_error 'Docking Station Full'
       end
-    end
 
-      it 'has a default capacity' do
-        expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
-  end
+      it 'can accept a capacity on creation' do
+        rack = DockingStation.new(20)
+        expect(rack.capacity).to eq 20
+      end
+    end
 end
