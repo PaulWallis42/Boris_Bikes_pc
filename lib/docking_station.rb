@@ -6,6 +6,7 @@ class DockingStation
 
   def initialize(capacity=10)
     @bikes = []
+    @broken_bikes = []
     @capacity = capacity
   end
 
@@ -15,16 +16,22 @@ class DockingStation
   end
 
   def dock(bike)
-    fail 'Docking Station Full' if full?
-    @bikes << bike
+    if full?
+      fail 'Docking Station Full'
+    elsif bike.broken? == true
+      @broken_bikes << bike
+    else
+      @bikes << bike
+    end
   end
 
   private
 
   attr_reader :bikes
+  attr_reader :broken_bikes
 
   def full?
-    @bikes.count >= capacity
+    @bikes.count + @broken_bikes.count >= capacity
   end
 
   def empty?
