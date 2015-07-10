@@ -7,6 +7,13 @@ describe Van do
     expect(van.capacity).to eq 20
   end
 
+  it 'can not go over the capacity' do
+    docking_station = double :docking_station, release_broken_bike: :bike
+    subject.capacity.times {subject.collect_broken_bike docking_station}
+    expect {subject.collect_broken_bike docking_station }.to raise_error 'Van is full'
+    expect(subject.broken_bikes.length).to eq 10
+  end
+
   it 'can collect a broken bike from docking station' do
     subject.collect_broken_bike double :docking_station, release_broken_bike: :bike
     expect(subject.broken_bikes.length).to eq 1
