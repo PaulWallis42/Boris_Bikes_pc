@@ -18,19 +18,11 @@ class DockingStation
     end
   end
 
-  def release_broken_bike
-    @broken_bikes.pop
-  end
-
   def collect_working_bike van
     @working_bikes << van.release_working_bike
   end
 
   private
-
-  def full?
-    @working_bikes.count + @broken_bikes.count >= capacity
-  end
 
   def empty?
     @working_bikes.empty?

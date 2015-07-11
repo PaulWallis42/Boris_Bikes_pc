@@ -9,23 +9,9 @@ class Van
     @broken_bikes << docking_station.release_broken_bike
   end
 
-  def release_broken_bike
-    @broken_bikes.pop
-  end
-
   def collect_working_bike garage
     fail 'Van is full' if full?
     @working_bikes << garage.release_working_bike
-  end
-
-  def release_working_bike
-    @working_bikes.pop
-  end
-
-  private
-
-  def full?
-    @working_bikes.count + @broken_bikes.count >= capacity
   end
 
 end

@@ -12,5 +12,18 @@ module BikeStorage
     @capacity = capacity
   end
 
+  def release_broken_bike
+    @broken_bikes.pop
+  end
+
+  def release_working_bike
+    @working_bikes.pop
+  end
+
+  private
+
+  def full?
+      @working_bikes.count + @broken_bikes.count >= capacity
+  end
 
 end
