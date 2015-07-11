@@ -6,7 +6,7 @@ describe Garage do
   let(:fix_bike) { double :bike, fix_bike: :bike }
 
   it 'has a capacity' do
-    expect(subject.capacity).to eq 50
+    expect(subject.capacity).to eq 10
   end
 
   it 'can take broken bikes' do
@@ -18,7 +18,7 @@ describe Garage do
     van = double :van, release_broken_bike: :bike
     subject.capacity.times { subject.collect_broken_bike van }
     expect { subject.collect_broken_bike van }.to raise_error 'Garage is full'
-    expect(subject.broken_bikes.length).to eq 50
+    expect(subject.broken_bikes.length).to eq 10
   end
 
   it 'can fix broken bikes' do

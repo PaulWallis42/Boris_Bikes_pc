@@ -1,16 +1,8 @@
+require_relative 'storage'
+
 class Van
 
-  DEFAULT_CAPACITY = 10
-
-  attr_reader :capacity
-  attr_reader :broken_bikes
-  attr_reader :working_bikes
-
-  def initialize capacity = DEFAULT_CAPACITY
-    @capacity = capacity
-    @broken_bikes = []
-    @working_bikes = []
-  end
+  include BikeStorage
 
   def collect_broken_bike docking_station
     fail 'Van is full' if full?
