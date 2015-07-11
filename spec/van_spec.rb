@@ -2,6 +2,9 @@ require 'van'
 
 describe Van do
 
+  let(:garage) { subject.collect_working_bike double :garage, release_working_bike: :bike }
+  let(:docking_station) { subject.collect_broken_bike double :docking_station, release_broken_bike: :bike }
+
   it 'has a capacity' do
     van = Van.new(20)
     expect(van.capacity).to eq 20
@@ -15,23 +18,23 @@ describe Van do
   end
 
   it 'can collect a broken bike from docking station' do
-    subject.collect_broken_bike double :docking_station, release_broken_bike: :bike
+    docking_station
     expect(subject.broken_bikes.length).to eq 1
   end
 
   it 'can give a broken bike to garage' do
-    subject.collect_broken_bike double :docking_station, release_broken_bike: :bike
+    docking_station
     subject.release_broken_bike
     expect(subject.broken_bikes.length).to be 0
   end
 
   it 'can collect a working bike from a garage' do
-    subject.collect_working_bike double :garage, release_working_bike: :bike
+    garage
     expect(subject.working_bikes.length).to eq 1
   end
 
   it 'can give a working bike to a docking station' do
-    subject.collect_working_bike double :garage, release_working_bike: :bike
+    garage
     subject.release_working_bike
     expect(subject.working_bikes.length).to eq 0
   end
